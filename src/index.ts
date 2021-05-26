@@ -79,9 +79,6 @@ async function collectTrades(m: MarketConfig, r: RedisConfig) {
   const programKey = new PublicKey(m.programId)
   const connection = new Connection(m.clusterUrl)
   const market = await Market.load(connection, marketAddress, undefined, programKey)
-  if(m.marketName == "KIN/USDT"){
-    console.log("here kin")
-  }
   async function storeTrades(ts: Trade[]) {
     if (ts.length > 0) {
       console.log(m.marketName, ts.length)
@@ -95,6 +92,9 @@ async function collectTrades(m: MarketConfig, r: RedisConfig) {
   while (true) {
     try {
       let fills = await market.loadFills(connection)
+      if(m.marketName == "KIN/USDT"){
+        console.log("kin fills", fills);
+      }
       let trades = orderBuffer.filterNewTrades(fills)
       storeTrades(trades)
     } catch (err) {
