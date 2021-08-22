@@ -136,7 +136,7 @@ interface TradingViewHistory {
 
 const app = express()
 var corsOptions = {
-  origin: 'https://dex.mn',
+  origin: ['https://dex.mn', 'http://localhost:3000'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
