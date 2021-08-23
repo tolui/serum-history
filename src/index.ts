@@ -168,7 +168,7 @@ app.get('/tv/symbols', async (req, res) => {
     session: '24x7',
     exchange: 'DEX.mn',
     listed_exchange: 'DEX.mn',
-    timezone: 'Etc/UTC',
+    timezone: 'Asia/Singapore',
     has_intraday: true,
     supported_resolutions: Object.keys(resolutions),
     minmov: 1,
