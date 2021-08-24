@@ -285,5 +285,5 @@ app.get('/trades/address/:marketPk', async (req, res) => {
   }
 })
 
-const httpPort = parseInt(process.env.PORT || '5000')
+const httpPort = 5000
 app.listen(httpPort)
