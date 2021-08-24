@@ -87,8 +87,8 @@ if (redisUrl.password !== '') {
 
 const network = 'mainnet-beta'
 const clusterUrl =
-  //process.env.RPC_ENDPOINT_URL || 'https://solana-api.projectserum.com'
-  process.env.RPC_ENDPOINT_URL || 'https://api.mainnet-beta.solana.com'
+  process.env.RPC_ENDPOINT_URL || 'https://solana-api.projectserum.com'
+  //process.env.RPC_ENDPOINT_URL || 'https://api.mainnet-beta.solana.com'
 const programIdV3 = '9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin'
 
 const nativeMarketsV3: Record<string, string> = {
@@ -155,7 +155,7 @@ app.get('/tv/config', async (req, res) => {
     supports_search: true,
     supports_timescale_marks: false,
   }
-  //res.set('Cache-control', 'public, max-age=360')
+  res.set('Cache-control', 'public, max-age=360')
   res.send(response)
 })
 
@@ -177,7 +177,7 @@ app.get('/tv/symbols', async (req, res) => {
   }
   console.log("here")
   console.log(resolutions)
-  //res.set('Cache-control', 'public, max-age=360')
+  res.set('Cache-control', 'public, max-age=360')
   res.send(response)
 })
 
@@ -224,7 +224,7 @@ app.get('/tv/history', async (req, res) => {
         l: candles.map((c) => c.low),
         v: candles.map((c) => c.volume),
       }
-      //res.set('Cache-control', 'public, max-age=1')
+      res.set('Cache-control', 'public, max-age=1')
       res.send(response)
       return
     } finally {
@@ -272,7 +272,7 @@ app.get('/trades/address/:marketPk', async (req, res) => {
           }
         }),
       }
-      //res.set('Cache-control', 'public, max-age=5')
+      res.set('Cache-control', 'public, max-age=5')
       res.send(response)
       return
     } finally {
