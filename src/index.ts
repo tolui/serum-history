@@ -175,6 +175,8 @@ app.get('/tv/symbols', async (req, res) => {
     minmov: 1,
     pricescale: 100,
   }
+  console.log("here")
+  console.log(resolutions)
   //res.set('Cache-control', 'public, max-age=360')
   res.set('Cache-control', 'no-cache')
   res.send(response)
