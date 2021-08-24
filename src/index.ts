@@ -54,7 +54,6 @@ async function collectEventQueue(m: MarketConfig, r: RedisConfig) {
 
   async function storeTrades(ts: Trade[]) {
     if (ts.length > 0) {
-      console.log("here0")
       console.log(m.marketName, ts.length)
       for (let i = 0; i < ts.length; i += 1) {
         await store.storeTrade(ts[i])
@@ -175,8 +174,6 @@ app.get('/tv/symbols', async (req, res) => {
     minmov: 1,
     pricescale: 100,
   }
-  console.log("here")
-  console.log(resolutions)
   res.set('Cache-control', 'public, max-age=360')
   res.send(response)
 })
