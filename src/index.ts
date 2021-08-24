@@ -168,11 +168,11 @@ app.get('/tv/symbols', async (req, res) => {
     session: '24x7',
     exchange: 'DEX.mn',
     listed_exchange: 'DEX.mn',
-    timezone: 'Asia/Singapore',
+    timezone: 'America/New_York',
     has_intraday: true,
     supported_resolutions: Object.keys(resolutions),
     minmov: 1,
-    pricescale: 100,
+    pricescale: 10000,
   }
   res.set('Cache-control', 'public, max-age=360')
   res.send(response)
