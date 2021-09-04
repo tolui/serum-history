@@ -227,8 +227,8 @@ app.get('/tv/config', async (req, res) => {
 })
 
 const priceScales: any = {
-  "QUEST/USDT": 1000,
-  "ARDX/SOL": 100,
+  "QUEST/USDT": 10000,
+  "ARDX/SOL": 1000,
   "BTC/USDT": 1,
   "BTC/USDC": 1,
   "ETH/USDT": 10,
