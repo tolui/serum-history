@@ -123,12 +123,12 @@ async function collectEventQueue(m: MarketConfig, r: RedisConfig) {
         const [trades, currentSeqNum] = await fetchTrades(lastSeqNum)
         storeTrades(trades)
         store.storeNumber('LASTSEQ', currentSeqNum)
-      } catch (e) {
+      } catch (e:any) {
         notify(`collectEventQueue ${m.marketName} ${e.toString()}`)
       }
       await sleep({ Seconds: fetchInterval })
     }
-  } catch (e) {
+  } catch (e:any) {
     notify(`collectEventQueue ${m.marketName} ${e.toString()}`)
   }
 }
@@ -213,7 +213,7 @@ async function collectPerpEventQueue(r: RedisConfig, m: PerpMarketConfig) {
       const [trades, currentSeqNum] = await fetchTrades(new BN(lastSeqNum || 0))
       storeTrades(trades)
       store.storeNumber('LASTSEQ', currentSeqNum.toString() as any)
-    } catch (err) {
+    } catch (err:any) {
       notify(`collectPerpEventQueue ${m.name} ${err.toString()}`)
     }
 
@@ -339,7 +339,7 @@ app.get('/tv/history', async (req, res) => {
     res.set('Cache-control', 'public, max-age=1')
     res.send(response)
     return
-  } catch (e) {
+  } catch (e:any) {
     notify(`tv/history ${marketName} ${e.toString()}`)
     const error = { s: 'error' }
     res.status(500).send(error)
@@ -384,7 +384,7 @@ app.get('/trades/address/:marketPk', async (req, res) => {
     res.set('Cache-control', 'public, max-age=5')
     res.send(response)
     return
-  } catch (e) {
+  } catch (e:any) {
     notify(`trades ${marketName} ${e.toString()}`)
     const error = { s: 'error' }
     res.status(500).send(error)
