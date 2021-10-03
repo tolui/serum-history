@@ -36,6 +36,7 @@ const clusterUrl =
 const fetchInterval = process.env.INTERVAL ? parseInt(process.env.INTERVAL) : 30
 
 console.log({ clusterUrl, fetchInterval })
+console.log("dex.mn")
 
 const programIdV3 = '9xQeWvG816bUx9EPjHmaT23yvVM2ZWbrrpZb9PusVFin'
 
