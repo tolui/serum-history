@@ -242,7 +242,7 @@ const cache = new LRUCache<string, Trade[]>(
 
 const app = express()
 var corsOptions = {
-  origin: ['https://dex.mn', 'http://localhost:3000'],
+  origin: ['https://dex.mn', 'http://localhost:3000', 'https://trade.paynow.mn'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
