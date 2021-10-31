@@ -52,7 +52,10 @@ const nativeMarketsV3: Record<string, string> = {
   "SRM/USDT": "AtNnsY1AyRERWJ8xCskfz38YdvruWVJQUVXgScC1iPb",
   "SRM/USDC": "ByRys5tuUWDgL73G8JBAEfkdFf8JWBzPBDHsBVQ5vbQA",
   "RAY/USDT": "teE55QrL4a4QSfydR9dnHF97jgCfptpuigbb53Lo95g",
-  "RAY/USDC": "2xiv8A5xrJ7RnGdxXB42uFEkYHJjszEhaJyKKt4WaLep"
+  "RAY/USDC": "2xiv8A5xrJ7RnGdxXB42uFEkYHJjszEhaJyKKt4WaLep",
+  "USDT/USDC":"77quYg4MGneUdjgXCunt9GgM1usmrxKY31twEy3WHwcS",
+  "KIN/USDT":"4nCFQr8sahhhL4XJ7kngGFBmpkmyf3xLzemuMhn6mWTm",
+  "ATLAS/USDC":"Di66GTLsV64JgCCYGVcY21RZ173BHkjJVgPyezNN7P1K"
 }
 
 const symbolsByPk = Object.assign(
@@ -271,7 +274,10 @@ const priceScales: any = {
   "SRM/USDT": 1000,
   "SRM/USDC": 1000,
   "RAY/USDT": 1000,
-  "RAY/USDC": 1000
+  "RAY/USDC": 1000,
+  "USDT/USDC": 1000,
+  "KIN/USDT": 10000,
+  "ATLAS/USDC": 1000
 }
 
 app.get('/tv/symbols', async (req, res) => {
