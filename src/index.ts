@@ -155,7 +155,9 @@ function collectMarketData(programId: string, markets: Record<string, string>) {
   })
 }
 
-collectMarketData(programIdV3, nativeMarketsV3)
+if (process.env.pm_id === '11' || !process.env.pm_id) {
+  collectMarketData(programIdV3, nativeMarketsV3);
+}
 
 const groupConfig = Config.ids().getGroup('mainnet', 'mainnet.1') as GroupConfig
 
