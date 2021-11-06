@@ -1,3 +1,4 @@
+// @ts-ignore
 module.exports = {
     name: 'history',
     script: 'dist/index.js',
