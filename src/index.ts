@@ -56,6 +56,7 @@ const nativeMarketsV3: Record<string, string> = {
   "RAY/USDC": "2xiv8A5xrJ7RnGdxXB42uFEkYHJjszEhaJyKKt4WaLep",
   "USDT/USDC":"77quYg4MGneUdjgXCunt9GgM1usmrxKY31twEy3WHwcS",
   "KIN/USDT":"4nCFQr8sahhhL4XJ7kngGFBmpkmyf3xLzemuMhn6mWTm",
+  "KIN/USDC":"Bn6NPyr6UzrFAwC4WmvPvDr2Vm8XSUnFykM2aQroedgn",
   "ATLAS/USDC":"Di66GTLsV64JgCCYGVcY21RZ173BHkjJVgPyezNN7P1K"
 }
 
@@ -331,6 +332,7 @@ const priceScales: any = {
   "RAY/USDC": 1000,
   "USDT/USDC": 1000,
   "KIN/USDT": 10000,
+  "KIN/USDC": 10000,
   "ATLAS/USDC": 1000
 }
 
