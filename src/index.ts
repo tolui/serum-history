@@ -232,9 +232,9 @@ async function collectPerpEventQueue(r: RedisConfig, m: PerpMarketConfig) {
 if (process.env.ROLE === 'web') {
   console.warn('ROLE=web detected. Not collecting perp market data.')
 } else {
-  groupConfig.perpMarkets.forEach((m) =>
-    collectPerpEventQueue({ host, port, password, db: 0 }, m)
-  )
+  // groupConfig.perpMarkets.forEach((m) =>
+  //   collectPerpEventQueue({ host, port, password, db: 0 }, m)
+  // )
 }
 
 const cache = new LRUCache<string, Trade[]>(
