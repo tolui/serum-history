@@ -237,43 +237,30 @@ if (process.env.ROLE === 'web') {
   )
 }
 
-const priceScales: any = {
-  'BTC/USDC': 1,
-  'BTC-PERP': 1,
-
-  'ETH/USDC': 10,
-  'ETH-PERP': 10,
-
-  'SOL/USDC': 1000,
-  'SOL-PERP': 1000,
-
-  'RAY/USDC': 1000,
-  'RAY-PERP': 1000,
-
-  'SRM/USDC': 1000,
-  'SRM-PERP': 1000,
-
-  'FTT/USDC': 1000,
-  'FTT-PERP': 1000,
-
-  'COPE/USDC': 1000,
-  'COPE-PERP': 1000,
-
-  // 'ADA/USDC': 10000,
-  'ADA-PERP': 10000,
-
-  'MNGO/USDC': 10000,
-  'MNGO-PERP': 10000,
-
-  'USDT/USDC': 10000,
-  // 'USDT-PERP': 10000,
-}
-
 const cache = new LRUCache<string, Trade[]>(
   parseInt(process.env.CACHE_LIMIT ?? '500')
 )
 
 const marketStores = {} as any
+
+const priceScales: any = {
+  "QUEST/USDT": 10000,
+  "ARDX/SOL": 1000,
+  "BTC/USDT": 1,
+  "BTC/USDC": 1,
+  "ETH/USDT": 10,
+  "ETH/USDC": 10,
+  "SOL/USDT": 1000,
+  "SOL/USDC": 1000,
+  "SRM/USDT": 1000,
+  "SRM/USDC": 1000,
+  "RAY/USDT": 1000,
+  "RAY/USDC": 1000,
+  "USDT/USDC": 1000,
+  "KIN/USDT": 10000,
+  "KIN/USDC": 10000,
+  "ATLAS/USDC": 1000
+}
 
 Object.keys(priceScales).forEach((marketName) => {
   const conn = new Tedis({
@@ -316,25 +303,6 @@ app.get('/tv/config', async (req, res) => {
   res.set('Cache-control', 'public, max-age=360')
   res.send(response)
 })
-
-const priceScales: any = {
-  "QUEST/USDT": 10000,
-  "ARDX/SOL": 1000,
-  "BTC/USDT": 1,
-  "BTC/USDC": 1,
-  "ETH/USDT": 10,
-  "ETH/USDC": 10,
-  "SOL/USDT": 1000,
-  "SOL/USDC": 1000,
-  "SRM/USDT": 1000,
-  "SRM/USDC": 1000,
-  "RAY/USDT": 1000,
-  "RAY/USDC": 1000,
-  "USDT/USDC": 1000,
-  "KIN/USDT": 10000,
-  "KIN/USDC": 10000,
-  "ATLAS/USDC": 1000
-}
 
 app.get('/tv/symbols', async (req, res) => {
   const symbol = req.query.symbol as string
