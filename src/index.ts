@@ -279,7 +279,9 @@ Object.keys(priceScales).forEach((marketName) => {
       const key = store.keyForDay(+day)
       store
         .loadTrades(key, cache)
-        .then(() => console.log('loaded', key))
+        .then(() => {
+          //console.log('loaded', key)
+        })
         .catch(() => console.error('could not cache', key))
     }
   }
