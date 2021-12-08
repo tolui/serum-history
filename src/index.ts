@@ -19,6 +19,7 @@ import {
 import BN from 'bn.js'
 import notify from './notify'
 import LRUCache from 'lru-cache'
+import * as dayjs from 'dayjs'
 
 const redisUrl = new URL(process.env.REDISCLOUD_URL || 'redis://localhost:6379')
 const host = redisUrl.hostname
@@ -242,15 +243,66 @@ if (process.env.ROLE === 'web') {
   )
 }
 
-const conn = new Tedis({
-  host,
-  port,
-  password,
-})
+const priceScales: any = {
+  'BTC/USDC': 1,
+  'BTC-PERP': 1,
+
+  'ETH/USDC': 10,
+  'ETH-PERP': 10,
+
+  'SOL/USDC': 1000,
+  'SOL-PERP': 1000,
+
+  'RAY/USDC': 1000,
+  'RAY-PERP': 1000,
+
+  'SRM/USDC': 1000,
+  'SRM-PERP': 1000,
+
+  'FTT/USDC': 1000,
+  'FTT-PERP': 1000,
+
+  'COPE/USDC': 1000,
+  'COPE-PERP': 1000,
+
+  // 'ADA/USDC': 10000,
+  'ADA-PERP': 10000,
+
+  'MNGO/USDC': 10000,
+  'MNGO-PERP': 10000,
+
+  'USDT/USDC': 10000,
+  // 'USDT-PERP': 10000,
+}
 
 const cache = new LRUCache<string, Trade[]>(
   parseInt(process.env.CACHE_LIMIT ?? '500')
 )
+
+const marketStores = {} as any
+
+Object.keys(priceScales).forEach((marketName) => {
+  const conn = new Tedis({
+    host,
+    port,
+    password,
+  })
+
+  const store = new RedisStore(conn, marketName)
+  marketStores[marketName] = store
+
+  // preload heavy markets
+  if (['SOL/USDC', 'SOL-PERP', 'BTC-PERP'].includes(marketName)) {
+    for (let i = 1; i < 60; ++i) {
+      const day = dayjs.default().subtract(i, 'days')
+      const key = store.keyForDay(+day)
+      store
+        .loadTrades(key, cache)
+        .then(() => console.log('loaded', key))
+        .catch(() => console.error('could not cache', key))
+    }
+  }
+})
 
 const app = express()
 app.use(cors())
@@ -266,26 +318,6 @@ app.get('/tv/config', async (req, res) => {
   res.set('Cache-control', 'public, max-age=360')
   res.send(response)
 })
-
-const priceScales: any = {
-  'BTC/USDC': 1,
-  'BTC-PERP': 1,
-
-  'ETH/USDC': 10,
-  'ETH-PERP': 10,
-
-  'SOL/USDC': 1000,
-  'SOL-PERP': 1000,
-
-  'SRM/USDC': 1000,
-  'SRM-PERP': 1000,
-
-  'MNGO/USDC': 10000,
-  'MNGO-PERP': 10000,
-
-  'USDT/USDC': 10000,
-  'USDT-PERP': 10000,
-}
 
 app.get('/tv/symbols', async (req, res) => {
   const symbol = req.query.symbol as string
@@ -330,7 +362,7 @@ app.get('/tv/history', async (req, res) => {
 
   // respond
   try {
-    const store = new RedisStore(conn, marketName)
+    const store = marketStores[marketName] as RedisStore
 
     // snap candle boundaries to exact hours
     from = Math.floor(from / resolution) * resolution
@@ -378,7 +410,7 @@ app.get('/trades/address/:marketPk', async (req, res) => {
 
   // respond
   try {
-    const store = new RedisStore(conn, marketName)
+    const store = marketStores[marketName] as RedisStore
     const trades = await store.loadRecentTrades()
     const response = {
       success: true,
