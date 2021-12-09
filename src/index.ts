@@ -257,8 +257,8 @@ const priceScales: any = {
   "RAY/USDT": 1000,
   "RAY/USDC": 1000,
   "USDT/USDC": 1000,
-  "KIN/USDT": 10000,
-  "KIN/USDC": 10000,
+  "KIN/USDT": 100000,
+  "KIN/USDC": 100000,
   "ATLAS/USDC": 1000
 }
 
